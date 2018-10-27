@@ -1,0 +1,49 @@
+<div class="main-container">
+  <div class="alert alert-app-level">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
+        </div>
+        <div class="alert-text">
+          {{title}}
+        </div>
+      </div>
+    </div>
+    <button type="button" class="close" aria-label="Close">
+      <clr-icon aria-hidden="true" shape="close"></clr-icon>
+    </button>
+  </div>
+  <header class="header header-6">
+    <div class="branding">
+      <a href="..." class="nav-link">
+        <clr-icon shape="cog"></clr-icon>
+        <span class="title">Angular/Clarity Test Ptoject</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a href="javascript://" class="active nav-link nav-text">Dashboard</a>
+      <a href="javascript://" class="nav-link nav-text">Heroes</a>
+    </div>
+    <form class="search">
+      <label for="search_input">
+        <input id="search_input" type="text" placeholder="Search for heroes...">
+      </label>
+    </form>
+    <div class="header-actions">
+      <a href="..." class="nav-link nav-icon">
+        <clr-icon shape="cog"></clr-icon>
+      </a>
+    </div>
+  </header>
+  <div class="content-container">
+    <div class="content-area">
+      <app-heroe-details></app-heroe-details>
+    </div>
+    <nav class="sidenav">
+        <section class="nav-group">
+          <app-heroes></app-heroes>
+      </section>
+    </nav>
+  </div>
+</div>
