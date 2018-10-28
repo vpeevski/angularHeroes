@@ -10,6 +10,7 @@ import {HeroesDataService} from "../services/heroes-data.service";
 })
 export class HeroesComponent implements OnInit {
 
+  selectedHero: Hero;
   heroes = heroesMock;
 
   constructor(private dataService: HeroesDataService) {}
@@ -20,6 +21,7 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero) {
     this.dataService.selectHero(hero);
+    this.selectedHero = hero;
   }
 
 }
