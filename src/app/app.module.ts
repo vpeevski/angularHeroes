@@ -8,13 +8,15 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroeDetailsComponent } from './heroe-details/heroe-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { HerosFilterPipe } from './heros-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroeDetailsComponent,
-    DashboardComponent
+    DashboardComponent,
+    HerosFilterPipe
   ],
   imports: [
     BrowserModule,

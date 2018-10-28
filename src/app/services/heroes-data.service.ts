@@ -8,6 +8,9 @@ import {Observable} from "rxjs/internal/Observable";
 })
 export class HeroesDataService {
 
+  private filterSubject: Subject<string> = new Subject();
+  public filterHeroByName: Observable<string> = this.filterSubject.asObservable();
+
   private dataSubject: Subject<Hero> = new Subject();
   public selectedHero: Observable<Hero> = this.dataSubject.asObservable();
 
@@ -15,5 +18,9 @@ export class HeroesDataService {
 
   public selectHero (hero: Hero) {
     this.dataSubject.next(hero);
+  }
+
+  public updateFilter (filter: string) {
+    this.filterSubject.next(filter);
   }
 }
