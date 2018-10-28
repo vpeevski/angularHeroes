@@ -1,4 +1,15 @@
-<h2>My Heroes</h2>
-<ul class="nav-list list-unstyled">
-  <li class="nav-link" [ngClass]="{'active': selectedHero === hero}" *ngFor="let hero of heroes" (click)="onSelect(hero)"><span class="badge">{{hero.id}}</span> {{hero.name}}</li>
-</ul>
+<div class="content-container">
+  <div class="content-area">
+    <app-heroe-details></app-heroe-details>
+  </div>
+  <nav class="sidenav">
+    <section class="sidenav-content">
+      <section class="nav-group">
+        <h2>My Heroes</h2>
+        <ul class="nav-list list-unstyled">
+          <li class="nav-link" [ngClass]="{'active': selectedHero === hero}" *ngFor="let hero of heroes" (click)="onSelect(hero)"><span class="badge">{{hero.id}}</span> {{hero.name}}</li>
+        </ul>
+      </section>
+    </section>
+  </nav>
+</div>

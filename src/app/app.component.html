@@ -16,14 +16,14 @@
   </div>
   <header class="header header-6">
     <div class="branding">
-      <a href="..." class="nav-link">
+      <a routerLink="/dashboard" class="nav-link">
         <clr-icon shape="cog"></clr-icon>
         <span class="title">Angular/Clarity Test Ptoject</span>
       </a>
     </div>
     <div class="header-nav">
-      <a href="javascript://" class="active nav-link nav-text">Dashboard</a>
-      <a href="javascript://" class="nav-link nav-text">Heroes</a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link nav-text">Dashboard</a>
+      <a routerLink="/heroes" routerLinkActive="active" class="nav-link nav-text">Heroes</a>
     </div>
     <form class="search">
       <label for="search_input">
@@ -36,16 +36,5 @@
       </a>
     </div>
   </header>
-  <div class="content-container">
-    <div class="content-area">
-      <app-heroe-details></app-heroe-details>
-    </div>
-    <nav class="sidenav">
-      <section class="sidenav-content">
-        <section class="nav-group">
-          <app-heroes></app-heroes>
-        </section>
-      </section>
-    </nav>
-  </div>
+  <router-outlet></router-outlet>
 </div>

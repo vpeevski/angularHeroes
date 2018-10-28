@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { ClarityModule } from "@clr/angular";
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroeDetailsComponent } from './heroe-details/heroe-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroeDetailsComponent
+    HeroeDetailsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     ClarityModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
