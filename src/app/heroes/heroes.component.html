@@ -9,8 +9,8 @@
           <div class="col-xs-5"><h3>My Heroes</h3></div>
           <div class="col-xs-7">
             <div class="btn-group btn-link">
-              <button class="btn">Add</button>
-              <button class="btn">Delete</button>
+              <button class="btn" (click)="onAdd()">Add</button>
+              <button class="btn" (click)="onDelete()" [attr.disabled]="!selectedHero ? true : null">Delete</button>
             </div>
           </div>
         </div>
