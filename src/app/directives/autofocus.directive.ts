@@ -5,7 +5,7 @@ import { Directive,Input, ElementRef, Renderer } from '@angular/core';
 })
 export class AutofocusDirective {
   constructor(private elementRef: ElementRef) {}
-  ngOnInit(){
+  ngOnInit() {
     this.elementRef.nativeElement.focus();
   }
 }
