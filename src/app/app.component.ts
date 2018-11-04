@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HeroesDataService} from "./services/heroes-data.service";
 
 @Component({
@@ -7,6 +7,7 @@ import {HeroesDataService} from "./services/heroes-data.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('search_input') searchInput: ElementRef;
   heroesFilterQuery: string = '';
   title = 'Tour of heroes';
 
@@ -16,4 +17,7 @@ export class AppComponent {
     this.data.updateFilter(newValue);
   }
 
+  setFocus(searchInput: string) {
+    this.searchInput.nativeElement.focus();
+  }
 }

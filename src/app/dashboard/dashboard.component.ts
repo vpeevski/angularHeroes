@@ -9,7 +9,7 @@ import {Subscription} from "rxjs/internal/Subscription";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
   heroes: Hero[] = heroesMock;
   filterQuery: string = "";

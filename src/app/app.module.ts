@@ -9,6 +9,7 @@ import { HeroeDetailsComponent } from './heroe-details/heroe-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HerosFilterPipe } from './heros-filter.pipe';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HerosFilterPipe } from './heros-filter.pipe';
     HeroesComponent,
     HeroeDetailsComponent,
     DashboardComponent,
-    HerosFilterPipe
+    HerosFilterPipe,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,

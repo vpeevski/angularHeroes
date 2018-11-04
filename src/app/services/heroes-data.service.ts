@@ -15,7 +15,9 @@ export class HeroesDataService {
   private dataSubject: Subject<Hero> = new Subject();
   public selectedHero: Observable<Hero> = this.dataSubject.asObservable();
 
-  constructor() { }
+  constructor() {
+    console.log("HeroesDataService created");
+  }
 
   public selectHero (hero: Hero) {
     this.dataSubject.next(hero);
