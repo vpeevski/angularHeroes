@@ -40,15 +40,22 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.heroes = _.reject(this.heroes, (hero) => hero.id === this.selectedHero.id);
-    this.selectedHero = null;
+    this.selectedHero.isDeleting = true;
+    this.sleep(1000).then( () => {
+      const indexToDelete = _.findIndex(this.heroes, hero => hero.id === this.selectedHero.id);
+      this.heroes = [...this.heroes.slice(0, indexToDelete), ...this.heroes.slice(indexToDelete + 1)];
+      this.selectedHero.isDeleting = false;
+      this.selectedHero = this.heroes[indexToDelete === 0 ? 0 : indexToDelete - 1];
+    });
+
   }
 
   onAdd() {
     this.lastHeroId++;
     const newHero = {
       id: this.lastHeroId,
-      name: ""
+      name: "<Add name ...>",
+      isNew: true
     };
     this.heroes = [...this.heroes, newHero];
     this.selectHero(newHero);
@@ -57,5 +64,9 @@ export class HeroesComponent implements OnInit, OnDestroy {
   private selectHero (hero: Hero): void {
     this.dataService.selectHero(hero);
     this.selectedHero = hero;
+  }
+
+  sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
   }
 }

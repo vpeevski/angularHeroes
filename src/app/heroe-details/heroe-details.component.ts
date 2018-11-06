@@ -17,8 +17,4 @@ export class HeroeDetailsComponent implements OnInit {
     this.dataService.selectedHero.subscribe((hero) => this.selectedHero = hero);
   }
 
-  changeFilter() {
-    this.dataService.updateFilterWithLastValue();
-  }
-
 }
