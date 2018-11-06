@@ -45,7 +45,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
       const indexToDelete = _.findIndex(this.heroes, hero => hero.id === this.selectedHero.id);
       this.heroes = [...this.heroes.slice(0, indexToDelete), ...this.heroes.slice(indexToDelete + 1)];
       this.selectedHero.isDeleting = false;
-      this.selectedHero = this.heroes[indexToDelete === 0 ? 0 : indexToDelete - 1];
+      this.selectHero(this.heroes[indexToDelete === 0 ? 0 : indexToDelete - 1]);
     });
 
   }
