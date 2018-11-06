@@ -41,13 +41,12 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   onDelete() {
     this.selectedHero.isDeleting = true;
+    const indexToDelete = _.findIndex(this.heroes, hero => hero.id === this.selectedHero.id);
+    this.selectHero(this.heroes[indexToDelete === 0 ? 0 : indexToDelete - 1]);
     this.sleep(1000).then( () => {
-      const indexToDelete = _.findIndex(this.heroes, hero => hero.id === this.selectedHero.id);
       this.heroes = [...this.heroes.slice(0, indexToDelete), ...this.heroes.slice(indexToDelete + 1)];
       this.selectedHero.isDeleting = false;
-      this.selectHero(this.heroes[indexToDelete === 0 ? 0 : indexToDelete - 1]);
     });
-
   }
 
   onAdd() {
@@ -59,6 +58,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
     };
     this.heroes = [...this.heroes, newHero];
     this.selectHero(newHero);
+    this.sleep(1000).then (() => newHero.isNew = false);
   }
 
   private selectHero (hero: Hero): void {
