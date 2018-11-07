@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {heroesMock, LAST_HERO_ID} from "../mock-heroes";
 import {HeroesDataService} from "../services/heroes-data.service";
-import {Subscription} from "rxjs/internal/Subscription";
-import { _ } from "underscore";
+import {_} from "underscore";
+import {ActivatedRoute} from "@angular/router";
+import {NavigationService} from "../services/navigation.service";
 
 @Component({
   selector: 'app-heroes',
@@ -12,27 +13,19 @@ import { _ } from "underscore";
 })
 export class HeroesComponent implements OnInit, OnDestroy {
 
-  selectedHero: Hero;
   heroes = heroesMock;
-  filterValue: string;
-  filterSubscription: Subscription;
+  selectedHero: Hero;
   lastHeroId: number = LAST_HERO_ID;
 
 
-  constructor(private dataService: HeroesDataService) {}
+  constructor(private route: ActivatedRoute, private navigationService: NavigationService, private dataService: HeroesDataService) {
+    this.navigationService.updateRoute(route);
+  }
 
   ngOnInit() {
-    this.filterSubscription = this.dataService.filterHeroByName.subscribe((newFilterValue) => {
-        this.filterValue = newFilterValue;
-        if (this.selectedHero && !this.selectedHero.name.includes(newFilterValue)) {
-          this.selectedHero = null;
-        }
-      }
-    );
   }
 
   ngOnDestroy() {
-    this.filterSubscription.unsubscribe();
   }
 
   onSelect(hero: Hero) {
@@ -40,12 +33,22 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.selectedHero.isDeleting = true;
-    const indexToDelete = _.findIndex(this.heroes, hero => hero.id === this.selectedHero.id);
-    this.selectHero(this.heroes[indexToDelete === 0 ? 1 : indexToDelete - 1]);
-    this.sleep(1000).then( () => {
-      this.heroes = [...this.heroes.slice(0, indexToDelete), ...this.heroes.slice(indexToDelete + 1)];
-      this.selectedHero.isDeleting = false;
+    const heroToDelete = this.selectedHero;
+    heroToDelete.isDeleting = true;
+    const indexToDelete = _.findIndex(this.heroes, hero => hero.id === heroToDelete.id);
+    //console.log("indexToDelete = " + indexToDelete);
+    if (indexToDelete === 0 && this.heroes.length > 1) {
+      this.selectHero(this.heroes[1]);
+    } else {
+      this.selectHero(this.heroes[indexToDelete - 1]);
+    }
+
+    this.sleep(1000).then(() => {
+      //this.heroes = [...this.heroes.slice(0, indexToDelete), ...this.heroes.slice(indexToDelete + 1)]; // works OK
+      this.heroes = this.heroes.filter(function (element) {
+        return element.id !== heroToDelete.id;
+      });
+      heroToDelete.isDeleting = false;
     });
   }
 
@@ -58,15 +61,20 @@ export class HeroesComponent implements OnInit, OnDestroy {
     };
     this.heroes = [...this.heroes, newHero];
     this.selectHero(newHero);
-    this.sleep(1000).then (() => newHero.isNew = false);
+    this.sleep(1000).then(() => newHero.isNew = false);
   }
 
-  private selectHero (hero: Hero): void {
-    this.dataService.selectHero(hero);
-    this.selectedHero = hero;
+  private selectHero(hero: Hero): boolean {
+    if (hero && !hero.isDeleting) {
+      console.log("Selection changed to " + hero.name);
+      this.dataService.selectHero(hero);
+      this.selectedHero = hero;
+      return true;
+    }
+    return false;
   }
 
-  sleep (time) {
+  sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 }

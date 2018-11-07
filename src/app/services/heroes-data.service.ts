@@ -12,15 +12,13 @@ export class HeroesDataService {
   private filterSubject: Subject<string> = new BehaviorSubject("");
   public filterHeroByName: Observable<string> = this.filterSubject.asObservable();
 
-  private dataSubject: Subject<Hero> = new Subject();
-  public selectedHero: Observable<Hero> = this.dataSubject.asObservable();
+  private selectedHeroSubject: Subject<Hero> = new Subject();
+  public selectedHero: Observable<Hero> = this.selectedHeroSubject.asObservable();
 
-  constructor() {
-    console.log("HeroesDataService created");
-  }
+  constructor() {}
 
   public selectHero (hero: Hero) {
-    this.dataSubject.next(hero);
+    this.selectedHeroSubject.next(hero);
   }
 
   public updateFilter (filter: string) {

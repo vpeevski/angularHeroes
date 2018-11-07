@@ -15,7 +15,7 @@
           </div>
         </div>
         <ul class="nav-list list-unstyled">
-          <li class="nav-link" *ngFor="let hero of heroes | herosFilter: filterValue"
+          <li class="nav-link" *ngFor="let hero of heroes"
               (click)="onSelect(hero)" [className]="hero.isDeleting ? 'delete-animation' : hero.isNew ? 'add-animation' :''">
             <a [className] = "selectedHero === hero ? 'active nav-link' : 'nav-link'">
               <span [className]="'badge'">{{hero.id}}</span>

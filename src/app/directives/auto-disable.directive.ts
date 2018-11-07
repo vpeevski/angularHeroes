@@ -1,11 +1,11 @@
 import { Directive,Input, ElementRef, Renderer } from '@angular/core';
 
 @Directive({
-  selector: '[autofocus]'
+  selector: '[autodisable]'
 })
-export class AutofocusDirective {
+export class AutoDisableDirective {
   constructor(private elementRef: ElementRef) {}
   ngOnInit() {
-    this.elementRef.nativeElement.focus();
+    this.elementRef.nativeElement.disabled = true;
   }
 }
