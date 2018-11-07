@@ -22,8 +22,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.navigationServiceSubscribtion = this.navigationService.currentRoute.subscribe((newRoute) => {
-      const navUrl: string  = newRoute.snapshot.url.join('');
-      this.searchInput.nativeElement.disabled = navUrl === "heroes";
+        const navUrl: string = newRoute.snapshot.url.join('');
+        this.enableFilterInput(navUrl === "dashboard");
+        if (navUrl === "dashboard") {
+          this.focusFilterInput();
+        }
       }
     );
   }
@@ -41,11 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.searchInput.nativeElement.focus();
   }
 
-  enableFilterInput() {
-    this.searchInput.nativeElement.disabled = false;
-  }
-
-  disableFilterInput() {
-    this.searchInput.nativeElement.disabled = true;
+  enableFilterInput(isEnabled: boolean) {
+    this.searchInput.nativeElement.disabled = !isEnabled;
   }
 }

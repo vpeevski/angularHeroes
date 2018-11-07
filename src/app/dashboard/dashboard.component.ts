@@ -3,6 +3,8 @@ import {Hero} from '../hero';
 import {heroesMock} from "../mock-heroes";
 import {HeroesDataService} from "../services/heroes-data.service";
 import {Subscription} from "rxjs/internal/Subscription";
+import {ActivatedRoute} from "@angular/router";
+import {NavigationService} from "../services/navigation.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +15,10 @@ export class DashboardComponent implements OnInit {
 
   heroes: Hero[] = heroesMock;
   filterQuery: string = "";
-  dataServiceSubscribtion: Subscription;
+  private dataServiceSubscribtion: Subscription;
 
-  constructor(private dataService: HeroesDataService) {
+  constructor(private route: ActivatedRoute, private navigationService: NavigationService, private dataService: HeroesDataService) {
+    this.navigationService.updateRoute(route);
   }
 
   ngOnInit() {
